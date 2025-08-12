@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encuentra el objeto</title>
+  <link rel="stylesheet" href="hiddenObjects.css" />
+</head>
+<body>
+  <div class="juego">
+    <img src="img/Descripción de cuarto.jpg" class="fondo" />
+
+    <!-- Objetos escondidos -->
+    <img src="img/patito.png" class="objeto" id="pato" style="top: 590px; left: 690px;" />
+    <img src="img/lazo.png" class="objeto" id="mono" style="top: 320px; left: 1199px;" />
+    <img src="img/guineo.png" class="objeto" id="banana" style="top: 100px; left: 1080px;" />
+    <img src="img/dino.png" class="objeto" id="dino" style="top: 760px; left: 180px;" />
+    <img src="img/pelota.png" class="objeto" id="pelota" style="top: 152px; left: 590px;" />
+
+    <!-- Lista de búsqueda -->
+    <div class="lista">
+      <img src="img/lazo.png" id="mono-btn" />
+      <img src="img/patito.png" id="pato-btn" />
+      <img src="img/pelota.png" id="pelota-btn" />
+      <img src="img/dino.png" id="dino-btn" />
+      <img src="img/guineo.png" id="banana-btn" />
+    </div>
+  </div>
+<div id="confeti-container"></div>
+<audio id="audioFelicidades" src="audio/goodGame.mp3"></audio>
+
+  <script src="hiddenObjects.js"></script>
+  <div id="confeti-container"></div>
+</body>
+</html>

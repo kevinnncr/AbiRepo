@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gráfica de Gantt - Proyecto</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['gantt']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function daysToMilliseconds(days) {
+        return days * 24 * 60 * 60 * 1000;
+      }
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'ID');
+        data.addColumn('string', 'Tarea');
+        data.addColumn('string', 'Recurso');
+        data.addColumn('date', 'Inicio');
+        data.addColumn('date', 'Fin');
+        data.addColumn('number', 'Duración');
+        data.addColumn('number', 'Progreso');
+        data.addColumn('string', 'Dependencias');
+
+        data.addRows([
+  ['1', 'Crear Zonas', 'Alta', new Date(2024, 4, 3), new Date(2024, 4, 7), null, 100, null],
+  ['2', 'Crear Cadenas', 'Alta', new Date(2024, 4, 3), new Date(2024, 4, 7), null, 100, null],
+
+  ['3', 'Modificar Zonas', 'Alta', new Date(2024, 4, 8), new Date(2024, 4, 14), null, 100, null],
+  ['4', 'Modificar Cadenas', 'Alta', new Date(2024, 4, 8), new Date(2024, 4, 14), null, 100, null],
+
+  ['5', 'Crear Campañas', 'Alta', new Date(2024, 4, 15), new Date(2024, 4, 21), null, 100, null],
+  ['6', 'Crear/Modificar Establecimientos', 'Alta', new Date(2024, 4, 15), new Date(2024, 4, 21), null, 100, null],
+
+  ['7', 'Asignar Coordenadas', 'Alta', new Date(2024, 4, 21), new Date(2024, 4, 28), null, 100, null],
+  ['8', 'Listar Jefe Zonal', 'Alta', new Date(2024, 4, 21), new Date(2024, 4, 28), null, 100, null],
+
+  ['9', 'Listado de Campañas', 'Alta', new Date(2024, 4, 30), new Date(2024, 5, 4), null, 100, null],
+  ['10', 'Generar Reportes', 'Alta', new Date(2024, 4, 30), new Date(2024, 5, 4), null, 100, null],
+
+  ['11', 'Evaluación de Campañas', 'Alta', new Date(2024, 5, 7), new Date(2024, 5, 11), null, 100, null],
+  ['12', 'Formulario de Campañas', 'Alta', new Date(2024, 5, 7), new Date(2024, 5, 11), null, 100, null],
+
+  ['13', 'Dashboard Campañas', 'Baja', new Date(2024, 5, 12), new Date(2024, 5, 18), null, 100, null],
+  ['14', 'Promedio Calificaciones', 'Baja', new Date(2024, 5, 12), new Date(2024, 5, 18), null, 100, null],
+
+  ['15', 'Exportar Fotos', 'Baja', new Date(2024, 5, 20), new Date(2024, 5, 25), null, 100, null],
+  ['16', 'Asignar Zonas a Tiendas', 'Baja', new Date(2024, 5, 20), new Date(2024, 5, 25), null, 100, null],
+
+  ['17', 'Porcentaje de Campañas', 'Baja', new Date(2024, 5, 26), new Date(2024, 6, 2), null, 100, null],
+  ['18', 'Buzón de Correos', 'Baja', new Date(2024, 5, 26), new Date(2024, 6, 2), null, 100, null],
+  
+  ['19', 'Visualizar Material', 'Baja', new Date(2024, 5, 26), new Date(2024, 6, 2), null, 100, null]
+]);
+
+        var options = {
+          height: 900,
+          gantt: {
+            trackHeight: 30,
+            palette: [
+              {
+                "color": "#e53935",
+                "dark": "#b71c1c",
+                "light": "#ffcdd2"
+              },
+              {
+                "color": "#1e88e5",
+                "dark": "#0d47a1",
+                "light": "#bbdefb"
+              }
+            ]
+          }
+        };
+
+        var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Gráfica de Gantt - Proyecto E-Trade</h2>
+    <div id="chart_div"></div>
+  </body>
+</html>

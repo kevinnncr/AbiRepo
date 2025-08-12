@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayuda a los Animalitos</title>
+  <link rel="stylesheet" href="styleAnimals.css">
+  <script src="animalitos.js" defer></script>
+</head>
+
+<body>
+  <!-- Nubes flotantes -->
+  <div class="cloud" style="top: 10%; animation-delay: 0s;">☁️</div>
+  <div class="cloud" style="top: 20%; animation-delay: 5s;">☁️</div>
+  <div class="cloud" style="top: 30%; animation-delay: 10s;">☁️</div>
+  <div class="cloud" style="top: 5%; animation-delay: 15s;">☁️</div>
+
+  <div class="content">
+    <h1>⭐ Ayuda a los Animalitos a Volver a Casa ⭐</h1>
+    <p id="mensaje" class="burbuja">🐾 Arrastra cada animalito a su hogar correcto 🏠</p>
+
+    <div class="zona-juego">
+      <!-- Animales -->
+      <div class="zona-animalitos">
+        <img src="img/dog.png" class="animalito" data-habitat="casa" draggable="true" alt="Perrito">
+        <img src="img/cat.png" class="animalito" data-habitat="casa" draggable="true" alt="Gatito">
+        <img src="img/fox.png" class="animalito" data-habitat="bosque" draggable="true" alt="Zorrito">
+        <img src="img/koala.png" class="animalito" data-habitat="jungla" draggable="true" alt="Koala">
+        <img src="img/frog.png" class="animalito" data-habitat="lago" draggable="true" alt="Ranita">
+        <img src="img/chick.png" class="animalito" data-habitat="granja" draggable="true" alt="Pollito">
+        <img src="img/turtle.png" class="animalito" data-habitat="lago" draggable="true" alt="Tortuga">
+        <img src="img/squirrel.png" class="animalito" data-habitat="bosque" draggable="true" alt="Ardilla">
+        <img src="img/snake.png" class="animalito" data-habitat="jungla" draggable="true" alt="Serpiente">
+        <img src="img/horse.png" class="animalito" data-habitat="granja" draggable="true" alt="Caballo">
+      </div>
+
+      <!-- Habitats -->
+      <div class="zona-habitats">
+        <div class="habitat" data-habitat="jungla">
+          <h3>🌴 Selva</h3>
+          <img src="img/vine.png" alt="Selva">
+        </div>
+        <div class="habitat" data-habitat="bosque">
+          <h3>🌲 Bosque</h3>
+          <img src="img/forest.png" alt="Bosque">
+        </div>
+        <div class="habitat" data-habitat="lago">
+          <h3>🏊 Lago</h3>
+          <img src="img/lake.png" alt="Lago">
+        </div>
+        <div class="habitat" data-habitat="casa">
+          <h3>🏠 Casa</h3>
+          <img src="img/house.png" alt="Casa">
+        </div>
+        <div class="habitat" data-habitat="granja">
+          <h3>🚜 Granja</h3>
+          <img src="img/barn.png" alt="Granja">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="celebration-screen" id="celebrationScreen">
+    <div class="stars-container" id="starsContainer"></div>
+
+    <h1 class="celebration-title">🎉 ¡INCREÍBLE! 🎉</h1>
+    <p class="celebration-message">¡Todos los animalitos están en casa!</p>
+
+    <div class="celebrating-animals">
+      <div class="animal-emoji">🐶</div>
+      <div class="animal-emoji">🐱</div>
+      <div class="animal-emoji">🦊</div>
+      <div class="animal-emoji">🐨</div>
+      <div class="animal-emoji">🐸</div>
+    </div>
+
+    <div class="medal-container">
+      <div class="medal">🏆</div>
+    </div>
+
+    <button class="continue-button" onclick="nextGame()">
+      🎮 ¡Jugar Otro Juego! 🎮
+    </button>
+  </div>
+  <!-- Audios -->
+  <audio id="audio-gracias" src="audio/gracias.mp3"></audio>
+  <audio id="audio-error" src="audio/pideAyuda.mp3"></audio>
+</body>
+
+</html>

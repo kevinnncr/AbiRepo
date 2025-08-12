@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prepara tu Pizza</title>
+  <link rel="stylesheet" href="pizza.css" />
+</head>
+<body>
+  <h1>🍕 ¡Prepara tu Deliciosa Pizza! 🍕</h1>
+
+  <div class="ingredientes">
+    <img src="img/Masa de pizza.jpg" id="masa" draggable="true" class="ingrediente" alt="Masa de pizza" />
+    <img src="img/tomate.png" id="salsa" draggable="true" class="ingrediente" alt="Salsa de tomate" />
+    <img src="img/tomateRodajas.jpg" id="tomateRodajas" draggable="true" class="ingrediente" alt="tomate" />
+    <img src="img/queso.png" id="queso" draggable="true" class="ingrediente" alt="Queso" />
+    <img src="img/cebollas.jpg" id="cebollas" draggable="true" class="ingrediente" alt="Cebollas" />
+    <img src="img/peperoni.png" id="peperoni" draggable="true" class="ingrediente" alt="Pepperoni" />
+  </div>
+
+  <div class="zona-pizza" id="zonaPizza">
+    <img id="pizzaBase" src="" style="display: none;" alt="Pizza en preparación" />
+  </div>
+  
+  <h2>📝 Receta: <span id="nombreReceta">¡Elige los ingredientes!</span></h2>
+  <div id="pasosReceta" class="pasos-receta"></div>
+
+  <div id="pantallaError" class="pantalla-error oculto"></div>
+<audio id="audioError" src="audio/pideAyuda.mp3"></audio>
+
+
+  <!-- Confeti y mensaje final -->
+  <div id="felicitaciones" class="oculto">
+    <h1>🎉 ¡Felicidades, Chef! 🎉</h1>
+    <p style="color: white; font-size: 1.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">¡Tu pizza está perfecta!</p>
+    <canvas id="confettiCanvas"></canvas>
+    <audio id="audioCelebracion" src="audio/goodGame.mp3"></audio>
+  </div>
+  <script src="pizza.js"></script>
+
+</body>
+</html>
