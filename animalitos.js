@@ -1,5 +1,3 @@
-// ayuda-animalitos.js
-
 const animalitos = document.querySelectorAll('.animalito');
 const habitats = document.querySelectorAll('.habitat');
 const mensaje = document.getElementById('mensaje');
@@ -9,6 +7,9 @@ const audioError = document.getElementById('audio-error');
 let colocadosCorrectamente = 0;
 const totalAnimalitos = animalitos.length;
 
+/* =======================
+   🖱️ DRAG & DROP (PC)
+   ======================= */
 animalitos.forEach(animal => {
   animal.addEventListener('dragstart', e => {
     e.dataTransfer.setData('text/plain', animal.dataset.habitat);
@@ -35,36 +36,80 @@ habitats.forEach(habitat => {
     e.preventDefault();
     const habitatCorrecto = e.dataTransfer.getData('text/plain');
     const habitatDestino = habitat.dataset.habitat;
-
     const dragging = document.querySelector('.animalito.dragging');
 
-    if (habitatCorrecto === habitatDestino) {
-      habitat.appendChild(dragging);
-      dragging.setAttribute('draggable', false);
-      dragging.classList.remove('dragging');
-      mensaje.textContent = '¡Gracias por ayudarme a volver a casa!';
-      audioGracias.play();
-      colocadosCorrectamente++;
-
-      if (colocadosCorrectamente === totalAnimalitos) {
-        setTimeout(() => {
-          mostrarCelebracion();
-        }, 500);
-      }
-
-    } else {
-      mensaje.textContent = 'Uy... ¡Ese no es mi hogar!';
-      audioError.play();
-    }
-
-    habitat.classList.remove('hovered');
+    validarColocacion(dragging, habitatCorrecto, habitatDestino, habitat);
   });
 });
 
+/* =======================
+   📱 TOUCH (CELULAR)
+   ======================= */
+animalitos.forEach(animal => {
+  let offsetX, offsetY;
+
+  animal.addEventListener("touchstart", e => {
+    const touch = e.touches[0];
+    offsetX = touch.clientX - animal.getBoundingClientRect().left;
+    offsetY = touch.clientY - animal.getBoundingClientRect().top;
+    animal.style.position = "absolute";
+    animal.style.zIndex = 1000;
+  });
+
+  animal.addEventListener("touchmove", e => {
+    const touch = e.touches[0];
+    animal.style.left = (touch.clientX - offsetX) + "px";
+    animal.style.top = (touch.clientY - offsetY) + "px";
+  });
+
+  animal.addEventListener("touchend", e => {
+    const touch = e.changedTouches[0];
+    let x = touch.clientX;
+    let y = touch.clientY;
+
+    habitats.forEach(habitat => {
+      let rect = habitat.getBoundingClientRect();
+      if (x > rect.left && x < rect.right && y > rect.top && y < rect.bottom) {
+        validarColocacion(animal, animal.dataset.habitat, habitat.dataset.habitat, habitat);
+      }
+    });
+  });
+});
+
+/* =======================
+   FUNCIÓN GENERAL
+   ======================= */
+function validarColocacion(animal, habitatCorrecto, habitatDestino, habitat) {
+  if (!animal) return;
+
+  if (habitatCorrecto === habitatDestino) {
+    habitat.appendChild(animal);
+    animal.setAttribute('draggable', false);
+    animal.style.position = "relative";
+    animal.style.left = "0";
+    animal.style.top = "0";
+    mensaje.textContent = '¡Gracias por ayudarme a volver a casa!';
+    audioGracias.play();
+    colocadosCorrectamente++;
+
+    if (colocadosCorrectamente === totalAnimalitos) {
+      setTimeout(() => {
+        mostrarCelebracion();
+      }, 500);
+    }
+  } else {
+    mensaje.textContent = 'Uy... ¡Ese no es mi hogar!';
+    audioError.play();
+  }
+  habitat.classList.remove('hovered');
+}
+
+/* =======================
+   CELEBRACIÓN 🎉
+   ======================= */
 function mostrarCelebracion() {
   const celebrationScreen = document.getElementById('celebrationScreen');
-  celebrationScreen.classList.add('show'); // Mostrar pantalla
-
+  celebrationScreen.classList.add('show');
   createCelebrationStars();
   createConfetti();
   startMessageRotation();
@@ -86,7 +131,6 @@ function createCelebrationStars() {
   }
 }
 
-// Crear confeti
 function createConfetti() {
   const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57'];
 
@@ -99,7 +143,6 @@ function createConfetti() {
     confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
     document.body.appendChild(confetti);
 
-    // Eliminar después de la animación
     setTimeout(() => {
       if (confetti.parentNode) {
         confetti.parentNode.removeChild(confetti);
@@ -108,42 +151,6 @@ function createConfetti() {
   }
 }
 
-// Crear fuegos artificiales
-function createFireworks() {
-  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FECA57', '#96CEB4'];
-
-  setInterval(() => {
-    const firework = document.createElement('div');
-    firework.className = 'firework';
-    firework.style.left = Math.random() * 100 + '%';
-    firework.style.top = Math.random() * 100 + '%';
-    firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    document.body.appendChild(firework);
-
-    setTimeout(() => {
-      if (firework.parentNode) {
-        firework.parentNode.removeChild(firework);
-      }
-    }, 2000);
-  }, 500);
-}
-
-// Función para ir al siguiente juego
-function nextGame() {
-  // Aquí pondrías la lógica para ir al menú principal o siguiente juego
-  window.location.href = 'index.html';
-}
-
-// Reproducir sonidos de celebración
-function playCelebrationSounds() {
-  // Si tienes archivos de audio
-  // const audio = new Audio('audio/celebration.mp3');
-  // audio.play();
-}
-
-
-
-// Mostrar diferentes mensajes aleatorios
 function startMessageRotation() {
   const celebrationMessages = [
     "¡Todos los animalitos están en casa!",
@@ -166,5 +173,7 @@ function startMessageRotation() {
     }
   }, 3000);
 }
-// Cambiar mensaje cada 3 segundos
-let messageIndex = 0;
+
+function nextGame() {
+  window.location.href = 'index.html';
+}
